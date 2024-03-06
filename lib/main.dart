@@ -12,7 +12,7 @@ void main() async {
   runApp(MyApp());
 }
 
- Future<void> initNotifications() async {
+Future<void> initNotifications() async {
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('@mipmap/ic_launcher');
   // final IOSInitializationSettings initializationSettingsIOS =
@@ -43,10 +43,6 @@ class LoginPage extends StatelessWidget {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
- 
-
-
 
   Future<void> _login(BuildContext context) async {
     try {
@@ -119,8 +115,8 @@ class _ButtonControlPageState extends State<ButtonControlPage> {
   late final DatabaseReference _userButtonsRef;
   late final User _user;
 
-  List<List<Color>> _buttonColors = List.generate(
-    12,
+  List<List<Color>> _buttonColors = List.generate( 
+    12, // 12 users, 12 lines
     (_) => List.generate(3, (_) => Colors.blue),
   );
   List<List<int>> _buttonQuantities = List.generate(
@@ -131,9 +127,6 @@ class _ButtonControlPageState extends State<ButtonControlPage> {
   @override
   void initState() {
     super.initState();
-    
-  checkESP8266Status();
-
     _user = FirebaseAuth.instance.currentUser!;
     _userButtonsRef = FirebaseDatabase.instance
         .reference()
@@ -153,7 +146,7 @@ class _ButtonControlPageState extends State<ButtonControlPage> {
               setState(() {
                 _buttonColors[i][j] =
                     data[key]['state'] == '1' ? _getColor(j) : Colors.blue;
-             _buttonQuantities[i][j] = data[key]['quantity'] ?? 0;
+                _buttonQuantities[i][j] = data[key]['quantity'] ?? 0;
               });
             }
           }
@@ -162,25 +155,8 @@ class _ButtonControlPageState extends State<ButtonControlPage> {
     });
   }
 
-
-
-String esp8266Status = "Checking...";
-
-void checkESP8266Status() {
-  DatabaseReference esp8266StatusRef = FirebaseDatabase.instance.reference().child('esp8266_status');
-  esp8266StatusRef.onValue.listen((event) {
-    setState(() {
-      dynamic value = event.snapshot.value;
-      esp8266Status = (value != null) ? value.toString() : "Unknown";
-    });
-  });
-}
-
-
-
-
   String _getButtonName(int colIndex) {
-    List<String> colors = ['Hamper', 'On Process', 'Normal'];
+    List<String> colors = ['Hamper', 'On Process', 'OK'];
     return '${colors[colIndex]}';
   }
 
@@ -229,12 +205,12 @@ void checkESP8266Status() {
     }
   }
 
-   Future<void> _showNotification() async {
+  Future<void> _showNotification() async {
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails(
       'channel_id',
       'channel_name',
-     // 'channel_description',
+      // 'channel_description',
       importance: Importance.max,
       priority: Priority.high,
       playSound: true,
@@ -289,7 +265,7 @@ void checkESP8266Status() {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ESP8266 Status: $esp8266Status'),
+        title: Text('OMC Automation'),
         actions: [
           IconButton(
             icon: Icon(Icons.email),
@@ -304,7 +280,7 @@ void checkESP8266Status() {
       body: SingleChildScrollView(
         child: Column(
           children: List.generate(
-            12,
+            12, // 12 lines
             (rowIndex) => Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -353,11 +329,7 @@ void checkESP8266Status() {
             ),
           ),
         ),
-        
       ),
-      
     );
   }
 }
-
-
