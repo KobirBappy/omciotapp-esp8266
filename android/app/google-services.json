@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "662751861040",
+    "firebase_url": "https://omciot-faaed-default-rtdb.firebaseio.com",
+    "project_id": "omciot-faaed",
+    "storage_bucket": "omciot-faaed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:662751861040:android:272729e9507051c0fa90f5",
+        "android_client_info": {
+          "package_name": "com.example.omciotapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC66UXMf1eskwNSsweAM2FPRfKRK1XUGu8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
